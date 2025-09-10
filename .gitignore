@@ -1,0 +1,35 @@
+# Node dependencies
+client/node_modules
+server/node_modules
+node_modules
+
+# Frontend build outputs
+client/.next
+client/out
+client/build
+
+# Backend build outputs
+server/dist
+server/build
+
+# Environment files
+.env*
+client/.env
+server/.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Misc
+.DS_Store
+*.pem
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+client/next-env.d.ts
