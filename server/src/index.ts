@@ -8,4 +8,5 @@ app.use(cors());
 
 app.listen(PORT, () => {
   console.log(`🚀 GraphQL server running at http://localhost:${PORT}/graphql`);
+
 });
