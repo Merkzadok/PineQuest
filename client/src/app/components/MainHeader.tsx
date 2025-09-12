@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { Users, Book, Globe, Menu, X } from "lucide-react";
 const MainHeader = () => {

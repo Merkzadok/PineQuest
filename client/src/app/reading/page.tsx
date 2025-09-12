@@ -7,3 +7,4 @@ const Reading = () => {
     </div>
   );
 };
+export default Reading;
