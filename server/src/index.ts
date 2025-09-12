@@ -1,15 +1,12 @@
-import express from "express";
-import dotenv from "dotenv";
-
-dotenv.config();
+import express from 'express';
+import { expressMiddleware } from '@apollo/server/express4';
+import { server } from './graphql/server';
 
 const app = express();
-const port = 4001;
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Server is running!");
-});
+app.use('/graphql', expressMiddleware(server));
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.listen(4000, () => {
+  console.log('🚀 GraphQL server running at http://localhost:4000/graphql');
 });

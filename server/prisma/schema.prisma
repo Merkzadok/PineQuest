@@ -1,0 +1,30 @@
+datasource db {
+  provider = "postgresql" // mysql/sqlite
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String @id @default(cuid())
+  name     String
+  email    String @unique
+  password String
+  Room     Room[]
+}
+
+model Room {
+  id       String   @id @default(cuid())
+  name     String
+  players  User[]
+  Game     Game[]
+}
+
+model Game {
+  id       String   @id @default(cuid())
+  room     Room?    @relation(fields: [roomId], references: [id])
+  roomId   String?
+  status   String
+}
