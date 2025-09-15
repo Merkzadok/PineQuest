@@ -2,18 +2,23 @@
 
 import React, { useEffect, useState } from "react";
 import { Users, ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-function App() {
+export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
+  const goToReading = () => router.push("/reading");
+  const goToDashboard = () => router.push("/dashboard");
+
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+    <div className="relative min-h-screen bg-gray-50 flex items-center justify-center p-6 overflow-hidden">
       <div
-        className={`max-w-3xl w-full text-center transition-all duration-1200 ease-out ${
+        className={`max-w-3xl w-full text-center transition-all duration-[1200ms] ease-out ${
           isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}
       >
@@ -57,7 +62,10 @@ function App() {
           }`}
         >
           {/* Kids Button */}
-          <button className="group relative px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 min-w-[160px] overflow-hidden">
+          <button
+            onClick={goToReading}
+            className="group relative px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg transition-transform duration-300 transform hover:-translate-y-0.5 min-w-[160px] overflow-hidden"
+          >
             <div className="flex items-center justify-center gap-2 relative z-10">
               <span>For Kids</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -66,7 +74,10 @@ function App() {
           </button>
 
           {/* Parents Button */}
-          <button className="group relative px-8 py-4 border border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 min-w-[160px] bg-white hover:bg-gray-50">
+          <button
+            onClick={goToDashboard}
+            className="group relative px-8 py-4 border border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 font-medium rounded-lg transition-transform duration-300 transform hover:-translate-y-0.5 min-w-[160px] bg-white hover:bg-gray-50"
+          >
             <div className="flex items-center justify-center gap-2">
               <span>For Parents</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -74,29 +85,26 @@ function App() {
           </button>
         </div>
 
-        {/* Subtle footer text */}
+        {/* Footer text */}
         <p
-          className={`text-gray-400 text-sm mt-12 font-light transition-all duration-1000 delay-1200 ${
+          className={`text-gray-400 text-sm mt-12 font-light transition-opacity duration-1000 delay-1200 ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
         >
           Choose your experience to begin
         </p>
 
-        {/* Minimal decorative elements */}
+        {/* Decorative elements */}
         <div className="absolute top-1/4 left-8 w-1 h-16 bg-gradient-to-b from-transparent via-gray-200 to-transparent opacity-40"></div>
         <div className="absolute bottom-1/4 right-8 w-1 h-12 bg-gradient-to-b from-gray-200 via-transparent to-gray-200 opacity-30"></div>
 
         {/* Floating accent */}
         <div
-          className={`absolute top-16 right-1/4 w-2 h-2 bg-gray-300 rounded-full transition-all duration-2000 ${
+          className={`absolute top-16 right-1/4 w-2 h-2 bg-gray-300 rounded-full transition-opacity duration-2000 ${
             isLoaded ? "opacity-60 animate-pulse" : "opacity-0"
           }`}
-          style={{ animationDuration: "4s" }}
         ></div>
       </div>
     </div>
   );
 }
-
-export default App;
