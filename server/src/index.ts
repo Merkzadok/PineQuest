@@ -1,12 +1,26 @@
-import express from "express";
-import cors from "cors";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { PrismaClient } from "@prisma/client";
+import { typeDefs } from "./graphql/schema";
+import { resolvers } from "./graphql/resolvers";
 
-const app = express();
-const PORT = 4001;
-app.use(express.json());
-app.use(cors());
+const prisma = new PrismaClient();
 
-app.listen(PORT, () => {
-  console.log(`🚀 GraphQL server running at http://localhost:${PORT}/graphql`);
+async function startServer() {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers: resolvers(prisma),
+  });
 
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
+    context: async () => ({ prisma }),
+  });
+
+  console.log(`🚀 Server ready at ${url}`);
+}
+
+startServer().catch((err) => {
+  console.error(err);
+  process.exit(1);
 });
